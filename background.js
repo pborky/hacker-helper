@@ -14,6 +14,7 @@ runtime.onMessage.addListener(
 // execute hack.js on pageAction icon click
 chrome.pageAction.onClicked.addListener(
     function(tab) {
-        chrome.tabs.executeScript(null, {file: "hack.js"});
+        chrome.tabs.executeScript(tab.id, {file: "hack.js"});
+        chrome.tabs.executeScript(tab.id, {file: "hack.css"});
     }
 );
