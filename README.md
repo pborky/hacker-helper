@@ -1,4 +1,4 @@
 Hacker Helper
 =============
 
-A Chromium plugin for injecting and transformations of web pages.
+A Chromium plugin for injecting and transformation of web pages.
