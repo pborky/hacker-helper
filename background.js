@@ -1,42 +1,19 @@
-/**
- * Copyright 2011 Google Inc. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 
-/**
- * @author opensource@google.com
- * @license Apache License, Version 2.0.
- */
-
-'use strict';
-
-function handleRequest(request, sender, callback) {
-  // Simply relay the request. This lets content.js talk to bar.js.
-  chrome.tabs.sendMessage(sender.tab.id, request, callback);
-}
-chrome.extension.onMessage.addListener(handleRequest);
+// this crap should be removed in future (compatibility of chrome 20-25 vs. 26 )
+var runtime = chrome.runtime && chrome.runtime.sendMessage ? chrome.runtime : chrome.extension
 
 
-// Copyright (c) 2011 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
+// listen to message form content.js and show the pageAction icon in omnibox
+runtime.onMessage.addListener(
+    function (request, sender, sendResponse) {
+        chrome.pageAction.show(sender.tab.id);
+        sendResponse({farewell: "goodbye"});
+    }
+);
 
-// Called when the user clicks on the browser action.
-chrome.browserAction.onClicked.addListener(function(tab) {
-  // No tabs or host permissions needed!
-  console.log('Injecting ' + tab.url + ' with shit!');
-  chrome.tabs.executeScript({
-    code: 'document.body.innerHTML="You are such a dick!"'
-  });
-});
+// execute hack.js on pageAction icon click
+chrome.pageAction.onClicked.addListener(
+    function(tab) {
+        chrome.tabs.executeScript(null, {file: "hack.js"});
+    }
+);
