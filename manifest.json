@@ -1,0 +1,24 @@
+{
+  "name": "Hacker Helper",
+  "version": "0.0.1",
+  "permissions": [
+    "activeTab"
+  ],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_title": "Inject page",
+    "default_icon": {
+        "19": "static/icon19.png",
+        "38": "static/icon38.png"
+    }
+  },
+  "manifest_version": 2,
+  "icons": {
+    "128": "static/icon128.png",
+    "32": "static/icon32.png",
+    "48": "static/icon48.png"
+  }
+}
