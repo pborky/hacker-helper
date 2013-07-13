@@ -2,7 +2,11 @@
   "name": "Hacker Helper",
   "version": "0.0.1",
   "manifest_version": 2,
-  "permissions": [ "activeTab", "tabs" ],
+  "permissions": [ 
+    "activeTab", 
+    "tabs",
+    "*://*/*" 
+  ],
   
   "background": {
     "scripts": [ "background.js" ],
@@ -10,7 +14,7 @@
   },
   "content_scripts" : [
     { 
-        "matches" : [ "http://*/*", "https://*/*" ],
+        "matches" : [ "*://*/*" ],
         "js" : [ "jquery.min.js", "content.js" ],
         "run_at" : "document_end",
         "all_frames" : false
