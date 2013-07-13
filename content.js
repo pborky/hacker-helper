@@ -1,4 +1,3 @@
-
 var regex = /.*/
 
 // this crap should be removed in future
@@ -15,6 +14,6 @@ if (regex.test(jQuery('body').text())) {
         }
     );
 } else {
-    console.log('Actually not Dolan.');
+    console.log('Actually not, Dolan.');
 }
 
